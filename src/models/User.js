@@ -17,7 +17,14 @@ const User = sequelize.define('User', {
     allowNull: false,
     unique: true,
     validate: {
-      is: /^\+[1-9]\d{1,14}$/
+      is: /^\+?[1-9]\d{1,14}$/
+    },
+    set(value) {
+      if (value && !value.startsWith('+')) {
+        this.setDataValue('phone', '+' + value);
+      } else {
+        this.setDataValue('phone', value);
+      }
     }
   },
   password: {
