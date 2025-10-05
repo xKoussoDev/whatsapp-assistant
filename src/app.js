@@ -40,3 +40,10 @@ app.use('/docs', require('./routes/docsRoutes'));
 
 // Error handler
 app.use(require('./middleware/error'));
+
+// 404 handler
+app.use((req, res) => {
+  res.status(404).json({ error: 'Route not found' });
+});
+
+module.exports = app;  // ← ESTA LÍNEA ES CRÍTICA! DEBE ESTAR
