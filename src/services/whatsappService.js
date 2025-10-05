@@ -8,9 +8,13 @@ const logger = require('../config/logger');
 class WhatsAppService {
   async handleIncomingMessage(data) {
     try {
-      const from = data.from;
-      const text = data.text?.body;
-      const messageId = data.id;
+      let from = data.from;
+      if (!from.startsWith('+')) {
+        from = '+' + from;
+    }
+    
+    const text = data.text?.body;
+    const messageId = data.id;
       
       if (!text) return;
       
